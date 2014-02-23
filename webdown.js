@@ -96,4 +96,23 @@ WebSQLDOWN.prototype._del = function(key, opt, cb) {
 		 });
 	});
 }
+
+WebSQLDOWN.prototype._batch = function(operations, opt, cb) {
+  var self = this;
+
+  var keysToDelete = {};
+  var valuesToPut = {};
+  for (var i = 0, len = operations.length; i < len; i++ ) {
+    var operation = operations[i];
+    if (operation.type === 'del') {
+      keysToDelete[operation.key] = true;
+    } else if (operation.type === 'put') {
+      valuesToPut[operation.key] = operation.value;
+    }
+  }
+
+  
+
+
+};
 module.exports = WebSQLDOWN;
